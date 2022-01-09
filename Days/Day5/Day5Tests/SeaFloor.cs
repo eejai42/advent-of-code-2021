@@ -13,9 +13,9 @@ namespace Day5Tests
 
         public int DangerousSpotCount { get { return this.MappedValues.Count(count => count.Value > 1); } }
 
-        public SeaFloor(List<string> rawValues)
+        public SeaFloor(List<string> rawValues, bool includeDiagonal = false)
         {
-            var lines = rawValues.Select(rawValue => new Line(rawValue)).ToList();
+            var lines = rawValues.Select(rawValue => new Line(rawValue, includeDiagonal)).ToList();
             lines.ForEach(line => this.DrawLine(line));
         }
 

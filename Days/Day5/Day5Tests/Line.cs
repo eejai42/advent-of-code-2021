@@ -10,13 +10,15 @@ namespace Day5Tests
         private string Input;
 
         public List<Point> Points { get; }
+        public bool IncludeDiagonal { get; }
         public Point Start { get; private set; }
         public Point End { get; private set; }
 
-        public Line(string input)
+        public Line(string input, bool includeDiagonal)
         {
             this.Input = input;
             this.Points = new List<Point>();
+            this.IncludeDiagonal = includeDiagonal;
             this.ParseInput();
         }
 
@@ -28,30 +30,38 @@ namespace Day5Tests
                             .ToList();
             bool isHorizontal = parts[0].Y == parts[1].Y;
             bool isVertical = parts[0].X == parts[1].X;
-            bool isValid = isHorizontal || isVertical;
-            if (isValid)
+            if (isHorizontal)
             {
-                if (isHorizontal)
+                this.Start = parts[0].X < parts[1].X ? parts[0] : parts[1];
+                this.End = parts[0].X < parts[1].X ? parts[1] : parts[0];
+                for (var i = this.Start.X; i <= this.End.X; i++)
                 {
-                    this.Start = parts[0].X < parts[1].X ? parts[0] : parts[1];
-                    this.End = parts[0].X < parts[1].X ? parts[1] : parts[0];
+                    var newPoint = new Point(i, Start.Y);
+                    this.Points.Add(newPoint);
                 }
-                else if (isVertical)
+            }
+            else if (isVertical)
+            {
+                this.Start = parts[0].Y < parts[1].Y ? parts[0] : parts[1];
+                this.End = parts[0].Y < parts[1].Y ? parts[1] : parts[0];
+                for (var i = Start.Y; i <= End.Y; i++)
                 {
-                    this.Start = parts[0].Y < parts[1].Y ? parts[0] : parts[1];
-                    this.End = parts[0].Y < parts[1].Y ? parts[1] : parts[0];
+                    var newPoint = new Point(Start.X, i);
+                    this.Points.Add(newPoint);
                 }
-
-
-                var currentIndex = isHorizontal ? this.Start.X : this.Start.Y;
-                var targetIndex = isHorizontal ? this.End.X : this.End.Y;
-                for (var i = currentIndex; i <= targetIndex; i++)
+            }
+            else if (this.IncludeDiagonal)
+            {
+                this.Start = parts[0].X < parts[1].X ? parts[0] : parts[1];
+                this.End = parts[0].X < parts[1].X ? parts[1] : parts[0];
+                for (var i = 0; i <= Math.Abs(this.Start.X - End.X); i++)
                 {
-                    var newPoint = new Point((isHorizontal ? i : Start.X), (isHorizontal ? Start.Y : i));
+                    var newPoint = new Point(this.Start.X + i, Start.Y + (End.Y > Start.Y ? i : -i));
                     this.Points.Add(newPoint);
                 }
             }
         }
+
 
         private Point GetPoint(string pointString)
         {

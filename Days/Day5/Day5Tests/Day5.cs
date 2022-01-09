@@ -25,13 +25,23 @@ namespace Day5Tests
         }
 
         [Test]
-        public void Test1()
+        public void Part1()
         {
             var seaFloor = new SeaFloor(this.RawValues);
             var output = seaFloor.Map();
             File.WriteAllText("../../../output.txt", output);
             int dangerousSpotCount = seaFloor.DangerousSpotCount;
             Assert.IsTrue(dangerousSpotCount == 6267);
+        }
+
+        [Test]
+        public void Part2()
+        {
+            var seaFloor = new SeaFloor(this.RawValues, true);
+            var output = seaFloor.Map();
+            File.WriteAllText("../../../output.txt", output);
+            int dangerousSpotCount = seaFloor.DangerousSpotCount;
+            Assert.IsTrue(dangerousSpotCount == 20196); // 20210 too big
         }
     }
 }
