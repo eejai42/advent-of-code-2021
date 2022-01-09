@@ -41,7 +41,7 @@ namespace Day2Tests
             int o2Rating = this.Report.CalculateOxygenGeneratorRating();
             int co2Rating = this.Report.CalculateC02ScrubberRating();
             var answer = o2Rating * co2Rating;
-            Assert.IsTrue(answer == 4354014);
+            Assert.IsTrue(answer == 4245351);
         }
 
     }

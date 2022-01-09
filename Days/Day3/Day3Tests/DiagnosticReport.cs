@@ -41,8 +41,12 @@ namespace Day2Tests
             var currentPosition = 1;
             while (readings.Count > 1)
             {
-                var countofOnes = this.CountOnesAtPosition(readings, currentPosition);
-                var valueToKeep = countofOnes >= (readings.Count / 2) ? '1' : '0';
+                var countOfOnes = this.CountOnesAtPosition(readings, currentPosition);
+                if (countOfOnes == readings.Count / 2.0)
+                {
+                    object o = 1;
+                }
+                var valueToKeep = countOfOnes >= (readings.Count / 2.0) ? '1' : '0';
                 readings = readings.Where(reading => reading.BinaryString[currentPosition - 1] == valueToKeep).ToList();
                 currentPosition++;
             }
@@ -55,8 +59,12 @@ namespace Day2Tests
             var currentPosition = 1;
             while (readings.Count > 1)
             {
-                var countofZeros = this.CountZerosAtPosition(readings, currentPosition);
-                var valueToKeep = countofZeros <= (readings.Count / 2) ? '0' : '1';
+                var countOfOnes = this.CountOnesAtPosition(readings, currentPosition);
+                if (countOfOnes == readings.Count / 2)
+                {
+                    object o = 1;
+                }
+                var valueToKeep = countOfOnes < (readings.Count / 2.0) ? '1' : '0';
                 readings = readings.Where(reading => reading.BinaryString[currentPosition - 1] == valueToKeep).ToList();
                 currentPosition++;
             }
