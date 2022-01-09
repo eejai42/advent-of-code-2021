@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Day4Tests
 {
@@ -20,11 +21,15 @@ namespace Day4Tests
             }
         }
 
-        internal bool WinsWith(int calledNumber)
+        public void MarkNumber(int calledNumber)
         {
-            var winLanes = new List<Int32>(new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 });
             var indexOfCalledNumber = this.Values.IndexOf(calledNumber);
             if (indexOfCalledNumber >= 0) this.Values[indexOfCalledNumber] = -1;
+        }
+
+        internal bool HasBingo()
+        {
+            var winLanes = new List<Int32>(new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 });
             for (int row = 0; row < 5; row++)
             {
                 for (int col = 0; col < 5; col++)
@@ -37,16 +42,30 @@ namespace Day4Tests
                 }
             }
             var isWin = winLanes.Any(anyWinLane => anyWinLane == -5);
-            if (isWin)
-            {
-                object o = 1;
-            }
             return isWin;
         }
 
         internal int SumOfUnmarkedNumbers()
         {
             return this.Values.Where(value => value >= 0).Sum();
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            int col = 0;
+            this.Values.ForEach(value =>
+            {
+                if (value >= 0) sb.Append(" ");
+                sb.Append($"{String.Format("{0:00}", value)} ");
+                if (col++ == 4)
+                {
+                    col = 0;
+                    sb.AppendLine();
+                }
+            });
+            sb.AppendLine();
+            return sb.ToString();
         }
     }
 }
