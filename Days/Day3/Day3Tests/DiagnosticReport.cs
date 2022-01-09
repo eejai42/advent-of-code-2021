@@ -41,7 +41,7 @@ namespace Day2Tests
             var currentPosition = 1;
             while (readings.Count > 1)
             {
-                var countofOnes = this.CountOnesAtPosition(currentPosition);
+                var countofOnes = this.CountOnesAtPosition(readings, currentPosition);
                 var valueToKeep = countofOnes >= (readings.Count / 2) ? '1' : '0';
                 readings = readings.Where(reading => reading.BinaryString[currentPosition - 1] == valueToKeep).ToList();
                 currentPosition++;
@@ -55,20 +55,27 @@ namespace Day2Tests
             var currentPosition = 1;
             while (readings.Count > 1)
             {
-                var countofOnes = this.CountOnesAtPosition(currentPosition);
-                var valueToKeep = countofOnes <= (readings.Count / 2) ? '0' : '1';
+                var countofZeros = this.CountZerosAtPosition(readings, currentPosition);
+                var valueToKeep = countofZeros <= (readings.Count / 2) ? '0' : '1';
                 readings = readings.Where(reading => reading.BinaryString[currentPosition - 1] == valueToKeep).ToList();
                 currentPosition++;
             }
             return readings[0].Value;
         }
 
-
         private int CountOnesAtPosition(int position)
         {
-            return this.Readings.Count(reading => reading.BinaryString[position - 1] == '1');
+            return this.CountOnesAtPosition(this.Readings, position);
+        }
+        private int CountOnesAtPosition(List<Reading> readings, int position)
+        {
+            return readings.Count(reading => reading.BinaryString[position - 1] == '1');
         }
 
+        private int CountZerosAtPosition(List<Reading> readings, int position)
+        {
+            return readings.Count - this.CountOnesAtPosition(readings, position);
+        }
 
         private int BinaryStringToDecimal(string binaryString)
         {

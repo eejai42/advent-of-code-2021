@@ -33,5 +33,9 @@ namespace Day2Tests
             return (int)decimalValue;
         }
 
+        public override string ToString()
+        {
+            return $"{this.BinaryString}";
+        }
     }
 }

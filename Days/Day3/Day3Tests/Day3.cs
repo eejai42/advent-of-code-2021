@@ -29,7 +29,7 @@ namespace Day2Tests
         [Test]
         public void Part1()
         {
-            int gamma = this.Report.CalculateGamma();   
+            int gamma = this.Report.CalculateGamma();
             int epsilon = this.Report.CalculateEpsilon();
             var answer = gamma * epsilon;
             Assert.IsTrue(answer == 4103154);
@@ -41,7 +41,7 @@ namespace Day2Tests
             int o2Rating = this.Report.CalculateOxygenGeneratorRating();
             int co2Rating = this.Report.CalculateC02ScrubberRating();
             var answer = o2Rating * co2Rating;
-            Assert.IsTrue(answer == 16769025);
+            Assert.IsTrue(answer == 4354014);
         }
 
     }
