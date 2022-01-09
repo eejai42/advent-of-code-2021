@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace Day4Tests
 {
@@ -41,17 +42,61 @@ namespace Day4Tests
         [Test]
         public void Part1()
         {
+            bool won = false;
             this.CalledNumbers.ForEach(calledNumber =>
             {
-                var winningBoard = this.Boards.FirstOrDefault(board => board.WinsWith(calledNumber));
-                if (!(winningBoard is null))
+                if (!won)
                 {
-                    var sumOfUnmarked = (int)winningBoard.SumOfUnmarkedNumbers();
-                    var answer = sumOfUnmarked * calledNumber;
-                    Assert.IsTrue(answer == 39984);
+                    this.Boards.ForEach(board => board.MarkNumber(calledNumber));
+                    var winningBoard = this.Boards.FirstOrDefault(board => board.HasBingo());
+                    if (!(winningBoard is null))
+                    {
+                        var sumOfUnmarked = (int)winningBoard.SumOfUnmarkedNumbers();
+                        var answer = sumOfUnmarked * calledNumber;
+                        Assert.IsTrue(answer == 39984);
+                        won = true;
+                    }
                 }
             });
-            Assert.Pass();
+            Assert.IsTrue(won);
+        }
+
+        [Test]
+        public void Part2()
+        {
+            var boards = this.Boards.ToList();
+            var index = 0;
+            this.CalledNumbers.ForEach(calledNumber =>
+            {
+                boards.ForEach(board => board.MarkNumber(calledNumber));
+                var winningBoards = boards.Where(board => board.HasBingo()).ToList();
+
+                this.SaveBoards("in_play", boards, index++, calledNumber);
+                if (winningBoards.Any())
+                {
+                    this.SaveBoards("winning", winningBoards, index, calledNumber);
+                }
+                winningBoards.ForEach(winningBoard =>
+                {
+                    boards.Remove(winningBoard);
+                    if (boards.Count == 0)
+                    {
+                        var sumOfUnmarked = winningBoard.SumOfUnmarkedNumbers();
+                        var answer = sumOfUnmarked * calledNumber;
+                        Assert.IsTrue(answer == 8468);
+                    }
+                });
+            });
+
+            Assert.IsTrue(boards.Count == 1);
+        }
+
+        private void SaveBoards(string name, List<Board> boards, int index, int calledNumber)
+        {
+            var sb = new StringBuilder();
+            String fileName = $"../../../{name}_{String.Format("{0:0000}", index)}_{calledNumber}.txt";
+            boards.ForEach(board => sb.AppendLine(board.ToString()));
+            File.WriteAllText(fileName, sb.ToString());
         }
     }
 }
