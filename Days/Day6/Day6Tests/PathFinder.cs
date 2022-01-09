@@ -21,11 +21,17 @@ namespace Day6Tests
         internal int FindShortestPath()
         {
             var shortestPath = new Path(this) { Length = Int32.MaxValue };
+            int shortestIndex = 0;
             for (int i = 0; i < 10000; i++)
             {
                 var path = this.CreateRandomPath();
-                if (path.Length < shortestPath.Length) shortestPath = path;
+                if (path.Length < shortestPath.Length)
+                {
+                    shortestPath.WritePath($"../../../data_{shortestIndex++}_{path.Length}.txt");
+                    shortestPath = path;
+                }
             }
+            
             return shortestPath.Length;
         }
 
@@ -33,10 +39,6 @@ namespace Day6Tests
         {
             var path = new Path(this);
             path.GenerateRandom();
-            if (path.Length < Int32.MaxValue)
-            {
-                object o = 1;
-            }
             return path;
         }
     }

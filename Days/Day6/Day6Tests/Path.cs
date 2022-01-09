@@ -26,24 +26,30 @@ namespace Day6Tests
 
         internal void GenerateRandom()
         {
-            var points = new List<Point>();
             var currentPoint = Point.Empty;
+            var points = new List<Point>();
+            points.Add(currentPoint);
             while (true)
             {
-                points.Add(currentPoint);
                 var nextPoint = this.NextRandomPoint(currentPoint, points);
-                
-                if (nextPoint == new Point(-1, -1)) break;
+
+                if (nextPoint == new Point(-1, -1))
+                {
+                    break;
+                }
                 else
                 {
+                    currentPoint = nextPoint;
                     points.Add(nextPoint);
+                    if (nextPoint.Y >= 98)
+                    {
+                        object o = 1;
+                    }
                     if (Point.Equals(nextPoint, this.PathFinder.MaxPoint)) break;
-                    else currentPoint = nextPoint;
                 }
             }
 
 
-            this.WritePath("../../../data.txt", points);
             if (currentPoint != this.PathFinder.MaxPoint)
             {
                 if (this.Attempts++ < 5) this.GenerateRandom();
@@ -56,15 +62,34 @@ namespace Day6Tests
             }
         }
 
-        private void WritePath(string fileName, List<Point> points)
+        public void WritePath(string fileName)
+        {
+            this.WritePath(fileName, this.Points);
+        }
+
+        public void WritePath(string fileName, List<Point> points)
         {
             var sb = new StringBuilder();
-            for (var row = 0; row < this.PathFinder.MaxPoint.Y; row++)
+            int next = 0;
+            char[,] map = new char[this.PathFinder.MaxPoint.X + 1, this.PathFinder.MaxPoint.Y + 1];
+            for (var row = 0; row < this.PathFinder.MaxPoint.Y + 1; row++)
             {
-                for (var col = 0; col < this.PathFinder.MaxPoint.X; col++)
+                for (var col = 0; col < this.PathFinder.MaxPoint.X + 1; col++)
                 {
-                    var point = new Point(col, row);
-                    sb.Append($"{(points.Contains(point) ? "x" : "-")}");
+                    map[col, row] = '-';
+                }
+            }
+            points.ForEach(point =>
+            {
+                map[point.X, point.Y] = next.ToString()[0];
+                next = (next + 1) % 10;
+            });
+
+            for (var row = 0; row < this.PathFinder.MaxPoint.Y + 1; row++)
+            {
+                for (var col = 0; col < this.PathFinder.MaxPoint.X + 1; col++)
+                {
+                    sb.Append(map[col, row]);
                 }
                 sb.AppendLine();
             }
@@ -73,7 +98,7 @@ namespace Day6Tests
 
         private Point NextRandomPoint(Point currentPoint, List<Point> points)
         {
-            var direction = PathFinder.Random.Next(3);
+            var direction = PathFinder.Random.Next(4);
             for (int i = 0; i < 4; i++)
             {
                 var candidateX = currentPoint.X;
@@ -98,13 +123,13 @@ namespace Day6Tests
                 }
                 var candidatePoint = new Point(candidateX, candidateY);
                 if (points.IndexOf(candidatePoint) == -1)
-                { 
+                {
                     if ((candidatePoint.X >= 0) &&
-                        (candidatePoint.X < this.PathFinder.MaxPoint.X) &&
+                        (candidatePoint.X <= this.PathFinder.MaxPoint.X) &&
                         (candidatePoint.Y >= 0) &&
-                        (candidatePoint.Y < this.PathFinder.MaxPoint.Y)) { 
+                        (candidatePoint.Y <= this.PathFinder.MaxPoint.Y))
+                    {
 
-                        points.Add(candidatePoint);
                         return candidatePoint;
                     }
                 }
