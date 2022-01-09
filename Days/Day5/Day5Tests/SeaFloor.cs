@@ -35,9 +35,9 @@ namespace Day5Tests
             var maxX = this.MappedValues.Keys.Max(max => max.X);
             var maxY = this.MappedValues.Keys.Max(max => max.Y);
             var sb = new StringBuilder();
-            for (int x = 1; x <= maxX; x++)
+            for (int y = 0; y <= maxY; y++)
             {
-                for (int y = 1; y <= maxY; y++)
+                for (int x = 0; x <= maxX; x++)
                 {
                     var mappedPoint = new Point(x, y);
                     var mappedValue = this.MappedValues.ContainsKey(mappedPoint) ? this.MappedValues[mappedPoint].ToString() : ".";

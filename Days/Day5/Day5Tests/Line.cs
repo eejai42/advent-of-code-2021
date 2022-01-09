@@ -27,24 +27,30 @@ namespace Day5Tests
                             .Select(pointString => this.GetPoint(pointString))
                             .ToList();
             bool isHorizontal = parts[0].Y == parts[1].Y;
-            if (isHorizontal)
+            bool isVertical = parts[0].X == parts[1].X;
+            bool isValid = isHorizontal || isVertical;
+            if (isValid)
             {
-                this.Start = parts[0].X < parts[1].X ? parts[0] : parts[1];
-                this.End = parts[0].X < parts[1].X ? parts[1] : parts[0];
+                if (isHorizontal)
+                {
+                    this.Start = parts[0].X < parts[1].X ? parts[0] : parts[1];
+                    this.End = parts[0].X < parts[1].X ? parts[1] : parts[0];
+                }
+                else if (isVertical)
+                {
+                    this.Start = parts[0].Y < parts[1].Y ? parts[0] : parts[1];
+                    this.End = parts[0].Y < parts[1].Y ? parts[1] : parts[0];
+                }
+
+
+                var currentIndex = isHorizontal ? this.Start.X : this.Start.Y;
+                var targetIndex = isHorizontal ? this.End.X : this.End.Y;
+                for (var i = currentIndex; i <= targetIndex; i++)
+                {
+                    var newPoint = new Point((isHorizontal ? i : Start.X), (isHorizontal ? Start.Y : i));
+                    this.Points.Add(newPoint);
+                }
             }
-            else
-            {
-                this.Start = parts[0].Y < parts[1].Y ? parts[0] : parts[1];
-                this.End = parts[0].Y < parts[1].Y ? parts[1] : parts[0];
-            }
-            var currentIndex = isHorizontal ? this.Start.X : this.Start.Y;
-            var targetIndex = isHorizontal ? this.End.X : this.End.Y;
-            for (var i = currentIndex; i < targetIndex; i++)
-            {
-                var newPoint = new Point((isHorizontal ? i : Start.X), (isHorizontal ? Start.Y : i));
-                this.Points.Add(newPoint);
-            }
-            
         }
 
         private Point GetPoint(string pointString)

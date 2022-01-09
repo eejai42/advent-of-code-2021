@@ -31,7 +31,7 @@ namespace Day5Tests
             var output = seaFloor.Map();
             File.WriteAllText("../../../output.txt", output);
             int dangerousSpotCount = seaFloor.DangerousSpotCount;
-            Assert.IsTrue(dangerousSpotCount == 19428);
+            Assert.IsTrue(dangerousSpotCount == 6267);
         }
     }
 }
