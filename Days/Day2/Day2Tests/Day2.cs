@@ -33,5 +33,13 @@ namespace Day2Tests
             var answer = this.Submarine.Position.X * this.Submarine.Position.Y;
             Assert.IsTrue(answer == 1648020);
         }
+
+        [Test]
+        public void Part2()
+        {
+            this.Submarine.CalculatePositionWithAim(this.Input);
+            var answer = this.Submarine.HorizontalPosition * this.Submarine.Depth;
+            Assert.IsTrue(answer == 1759818555);
+        }
     }
 }
