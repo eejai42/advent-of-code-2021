@@ -16,14 +16,14 @@ namespace Day07Tests
         public List<int> Positions { get; }
         public int RightmostCrab { get; private set; }
 
-        internal int FindOptimalAlignment()
+        internal long CalculateOptimalCost(bool exponentialCost = false)
         {
             var sb = new System.Text.StringBuilder();
             sb.AppendLine("Position,Cost");
             var bestPosition = new PositionCost(-1);
             for (int position = 1; position < this.RightmostCrab; position++)
             {
-                var fuel = this.CalculateCostAtPosition(position);
+                var fuel = this.CalculateCostAtPosition(position, exponentialCost);
                 sb.AppendLine($"{position},{fuel}");
                 if (fuel < bestPosition.Fuel)
                 {
@@ -34,11 +34,39 @@ namespace Day07Tests
             return bestPosition.Fuel;
         }
 
-        private int CalculateCostAtPosition(int targetPosition)
+        internal long CalculateOptimalExponentialCost()
         {
-            var cost = this.Positions
-                        .Select(position => Math.Abs(position - targetPosition)).Sum();
-            return cost;
+            return this.CalculateOptimalCost(true);
+        }
+
+        private long CalculateCostAtPosition(int targetPosition, bool calculateExponential)
+        {
+            if (calculateExponential)
+            {
+                var costExp = this.Positions
+                                    .Select(position => this.Factorial(Math.Abs(position - targetPosition)))
+                                    .Sum();
+                return costExp;
+            }
+            else
+            {
+                var cost = this.Positions
+                                .Select(position => Math.Abs(position - targetPosition)).Sum();
+                return cost;
+            }
+        }
+
+        public long Factorial(long number)
+        {
+            long result = 1;
+            long originalNumber = number;
+            number = originalNumber;
+            while (number > 1)
+            {
+                result += number;
+                number--;
+            }
+            return result;
         }
     }
 }
