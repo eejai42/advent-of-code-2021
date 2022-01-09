@@ -26,12 +26,26 @@ namespace Day14Tests
         }
 
         [Test]
-        public void Test1()
+        public void Part1()
         {
             var parser = new Parser();
             var invalidMessages = this.RawValues.Where(message => parser.IsInvalid(message)).ToList();
             var errorScore = invalidMessages.Sum(message => (int)parser.GetErrorScore(message));
-            Assert.IsTrue(errorScore == -1);
+            Assert.IsTrue(errorScore == 464991);
+        }
+
+        [Test]
+        public void Part2()
+        {
+            var parser = new Parser();
+            var incompleteMessages = this.RawValues.Where(message => parser.IsIncomplete(message)).ToList();
+            var completeScores = incompleteMessages
+                                    .Select(message => parser.CompleteScore(message))
+                                    .OrderBy(score => score)
+                                    .ToList();
+            var middleIndex = completeScores.Count / 2;
+            var middleScore = completeScores[middleIndex];
+            Assert.IsTrue(middleScore == 3662008566);
         }
     }
 }
