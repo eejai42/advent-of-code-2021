@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31911.196
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day1Tests", "Days\Day1\Day1Tests\Day1Tests.csproj", "{3F0979B2-8A6D-42E9-8FAF-75B77FC9C2F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day01Tests", "Days\Day1\Day1Tests\Day01Tests.csproj", "{3F0979B2-8A6D-42E9-8FAF-75B77FC9C2F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day2Tests", "Days\Day2\Day2Tests\Day2Tests.csproj", "{C6BD9938-1B92-416A-8CDC-7E9E8132F58B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day02Tests", "Days\Day2\Day2Tests\Day02Tests.csproj", "{C6BD9938-1B92-416A-8CDC-7E9E8132F58B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day3Tests", "Days\Day3\Day3Tests\Day3Tests.csproj", "{A35496B1-5FC0-484D-AE4C-EEA12C337070}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day03Tests", "Days\Day3\Day3Tests\Day03Tests.csproj", "{A35496B1-5FC0-484D-AE4C-EEA12C337070}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day4Tests", "Days\Day4\Day4Tests\Day4Tests.csproj", "{670A5DB6-26D8-4B2A-83CB-E0FB00DD3F7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day04Tests", "Days\Day4\Day4Tests\Day04Tests.csproj", "{670A5DB6-26D8-4B2A-83CB-E0FB00DD3F7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day5Tests", "Days\Day5\Day5Tests\Day5Tests.csproj", "{45700406-277D-4869-B046-B7141D983878}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day05Tests", "Days\Day5\Day5Tests\Day05Tests.csproj", "{45700406-277D-4869-B046-B7141D983878}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day6Tests", "Days\Day6\Day6Tests\Day6Tests.csproj", "{FA0A361C-EF9C-45F9-88DE-98C6DDEE00B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day14Testsx", "Days\Day14\Day14Tests\Day14Testsx.csproj", "{0A4263E3-A31A-4EA9-B21D-35CF3CC56872}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day15Tests", "Days\Day15\Day15Tests\Day15Tests.csproj", "{69E494C8-FCE8-41FD-8017-CBC5486EC1B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +43,14 @@ Global
 		{45700406-277D-4869-B046-B7141D983878}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45700406-277D-4869-B046-B7141D983878}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45700406-277D-4869-B046-B7141D983878}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FA0A361C-EF9C-45F9-88DE-98C6DDEE00B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FA0A361C-EF9C-45F9-88DE-98C6DDEE00B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FA0A361C-EF9C-45F9-88DE-98C6DDEE00B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FA0A361C-EF9C-45F9-88DE-98C6DDEE00B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A4263E3-A31A-4EA9-B21D-35CF3CC56872}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A4263E3-A31A-4EA9-B21D-35CF3CC56872}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A4263E3-A31A-4EA9-B21D-35CF3CC56872}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A4263E3-A31A-4EA9-B21D-35CF3CC56872}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69E494C8-FCE8-41FD-8017-CBC5486EC1B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69E494C8-FCE8-41FD-8017-CBC5486EC1B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69E494C8-FCE8-41FD-8017-CBC5486EC1B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69E494C8-FCE8-41FD-8017-CBC5486EC1B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
