@@ -1,3 +1,3 @@
-/Days/Day1/Day1Tests/.vs/**/*
-/Days/Day1/Day1Tests/bin/**/*
-/Days/Day1/Day1Tests/obj/**/*
+/**/.vs/**/*
+/**/bin/**/*
+/**/obj/**/*
