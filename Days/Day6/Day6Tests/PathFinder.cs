@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace Day6Tests
 {
@@ -7,14 +8,36 @@ namespace Day6Tests
     {
         private List<string> rawValues;
 
+        public Random Random { get; }
+        public Point MaxPoint { get; }
+
         public PathFinder(List<string> rawValues)
         {
             this.rawValues = rawValues;
+            this.Random = new Random();
+            this.MaxPoint = new Point(rawValues[0].Length - 1, rawValues.Count - 1);
         }
 
         internal int FindShortestPath()
         {
-            throw new NotImplementedException();
+            var shortestPath = new Path(this) { Length = Int32.MaxValue };
+            for (int i = 0; i < 10000; i++)
+            {
+                var path = this.CreateRandomPath();
+                if (path.Length < shortestPath.Length) shortestPath = path;
+            }
+            return shortestPath.Length;
+        }
+
+        private Path CreateRandomPath()
+        {
+            var path = new Path(this);
+            path.GenerateRandom();
+            if (path.Length < Int32.MaxValue)
+            {
+                object o = 1;
+            }
+            return path;
         }
     }
 }
