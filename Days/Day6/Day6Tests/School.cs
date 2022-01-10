@@ -8,6 +8,7 @@ namespace Day6Tests
     {
 
         public List<Fish> Fish { get; }
+        public long[] PopulationCounts { get; private set; }
 
         public School(List<string> rawValues)
         {
@@ -20,18 +21,33 @@ namespace Day6Tests
 
         internal void DaysPass(int days)
         {
-            for (int day = 0; day < days; day++)
+            this.PopulationCounts = new long[9];
+            this.Fish.ForEach(fish => this.PopulationCounts[fish.Interval]++);
+            for (int day = 1; day <= days; day++)
             {
-                this.Day = day;
-                this.Fish
-                    .ToList()
-                    .ForEach(fish => fish.DayPasses());
+                this.PassOneDay();
             }
+        }
+
+        private void PassOneDay()
+        {
+            var breaders = this.PopulationCounts[0];
+            for (int i = 0; i < 8; i++)
+            {
+                this.PopulationCounts[i] = this.PopulationCounts[i + 1];
+            }
+            this.PopulationCounts[8] = breaders;
+            this.PopulationCounts[6] += breaders;
+        }
+
+        internal long GetCurrentCount()
+        {
+            return this.PopulationCounts.Sum();
         }
 
         public override string ToString()
         {
-            return String.Join(",", this.Fish.Select(fish => fish.Timer));
+            return String.Join(",", this.Fish.Select(fish => fish.Interval));
         }
     }
 }

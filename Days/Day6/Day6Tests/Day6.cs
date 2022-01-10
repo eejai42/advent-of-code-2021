@@ -28,9 +28,18 @@ namespace Day6Tests
         public void Part1()
         {
             var school = new School(this.RawValues);
-            school.DaysPass(256);
-            var schoolSize = school.Fish.Count;
+            school.DaysPass(80);
+            var schoolSize = school.GetCurrentCount();
             Assert.IsTrue(schoolSize == 346063);
+        }
+
+        [Test]
+        public void Part2()
+        {
+            var school = new School(this.RawValues);
+            school.DaysPass(256);
+            var schoolSize = school.GetCurrentCount();
+            Assert.IsTrue(schoolSize == 1572358335990);
         }
     }
 }
