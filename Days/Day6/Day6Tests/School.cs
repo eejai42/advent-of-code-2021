@@ -22,7 +22,7 @@ namespace Day6Tests
         internal void DaysPass(int days)
         {
             this.PopulationCounts = new long[9];
-            this.Fish.ForEach(fish => this.PopulationCounts[fish.Interval]++);
+            this.Fish.ForEach(fish => this.PopulationCounts[fish.Timer]++);
             for (int day = 1; day <= days; day++)
             {
                 this.PassOneDay();
@@ -47,7 +47,7 @@ namespace Day6Tests
 
         public override string ToString()
         {
-            return String.Join(",", this.Fish.Select(fish => fish.Interval));
+            return String.Join(",", this.Fish.Select(fish => fish.Timer));
         }
     }
 }
