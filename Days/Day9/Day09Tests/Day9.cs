@@ -22,8 +22,9 @@ namespace Day09Tests
         public void Test1()
         {
             var floorMapper = new FloorMapper(this.Lines);
-            floorMapper.FindLowPoings();
-            Assert.Pass();
+            floorMapper.FindLowPoints();
+            var risk = floorMapper.LowPoints.Sum(riskLevel => riskLevel + 1);
+            Assert.IsTrue(risk == 526);
         }
     }
 }
