@@ -51,7 +51,7 @@ namespace Day4Tests
                     var winningBoard = this.Boards.FirstOrDefault(board => board.HasBingo());
                     if (!(winningBoard is null))
                     {
-                        var sumOfUnmarked = (int)winningBoard.SumOfUnmarkedNumbers();
+                        var sumOfUnmarked = winningBoard.SumOfUnmarkedNumbers();
                         var answer = sumOfUnmarked * calledNumber;
                         Assert.IsTrue(answer == 39984);
                         won = true;

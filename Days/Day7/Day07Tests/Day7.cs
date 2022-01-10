@@ -27,16 +27,9 @@ namespace Day07Tests
         [Test]
         public void Part2()
         {
-            try
-            {
-                var schoolOfCrabs = new SchoolOfCrabs(this.RawValues);
-                var costOfBestAlignment = schoolOfCrabs.CalculateOptimalExponentialCost();
-                Assert.IsTrue(costOfBestAlignment == 99266250);
-            }
-            catch (Exception ex)
-            {
-                object o = ex;
-            }
+            var schoolOfCrabs = new SchoolOfCrabs(this.RawValues);
+            var costOfBestAlignment = schoolOfCrabs.CalculateOptimalExponentialCost();
+            Assert.IsTrue(costOfBestAlignment == 99266250);
         }
     }
 }

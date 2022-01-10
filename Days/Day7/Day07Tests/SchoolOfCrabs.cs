@@ -44,7 +44,7 @@ namespace Day07Tests
             if (calculateExponential)
             {
                 var costExp = this.Positions
-                                    .Select(position => this.Factorial(Math.Abs(position - targetPosition)))
+                                    .Select(position => this.AddativeFactorial(Math.Abs(position - targetPosition)))
                                     .Sum();
                 return costExp;
             }
@@ -56,7 +56,7 @@ namespace Day07Tests
             }
         }
 
-        public long Factorial(long number)
+        public long AddativeFactorial(long number)
         {
             long result = 1;
             long originalNumber = number;
