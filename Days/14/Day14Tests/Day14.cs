@@ -9,23 +9,33 @@ namespace Day14Tests
     public class Tests
     {
         public string StartingPolymer { get; private set; }
-        internal List<Map> Keys { get; private set; }
+        internal List<String> MapValues { get; private set; }
 
         [SetUp]
         public void Setup()
         {
             var values = File.ReadAllText("../../../Input.txt").Split(Environment.NewLine);
             this.StartingPolymer = values.First();
-            this.Keys = values.Skip(2).Select(value => new Map(value)).ToList();
+            this.MapValues = values.Skip(2).ToList();
         }
 
         [Test]
-        public void Test1()
+        public void Part1()
         {
-            var polyMgr = new PolymerMgr(this.StartingPolymer, this.Keys);
+            var polyMgr = new PolymerMgr(this.StartingPolymer, this.MapValues);
             polyMgr.InsertPairsXTimes(10);
             var score = polyMgr.CalculateScore();
-            Assert.IsTrue(score = 3143);
+            Assert.IsTrue(score == 3143);
         }
+
+        [Test]
+        public void Part2()
+        {
+            var polyMgr = new PolymerMgr(this.StartingPolymer, this.MapValues);
+            polyMgr.InsertPairsXTimes(40);
+            var score = polyMgr.CalculateScore();
+            Assert.IsTrue(score == 4110215602456);
+        }
+
     }
 }

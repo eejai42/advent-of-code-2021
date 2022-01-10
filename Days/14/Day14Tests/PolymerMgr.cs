@@ -6,34 +6,62 @@ namespace Day14Tests
 {
     internal class PolymerMgr
     {
+        public List<Map> Keys;
         private string StartingPolymer;
-        private List<Map> Keys;
 
-        public PolymerMgr(string startingPolymer, List<Map> keys)
+        public char LastLetter { get; }
+
+        public PolymerMgr(string startingPolymer, List<string> mapValues)
         {
+            this.Keys = mapValues.Select(value => new Map(this, value)).ToList();
+            this.Keys.ForEach(key => key.FindSplitKeys());
             this.StartingPolymer = startingPolymer;
-            this.Keys = keys;
+            this.LastLetter = this.StartingPolymer.Last();
+            this.ParsePolymer();
         }
 
-        internal int CalculateScore()
+        private void ParsePolymer()
         {
-            var grps = this.StartingPolymer.GroupBy(chr => chr);
-            var sortedGrps = grps.OrderByDescending(grp => grp.Count())
-                                 .Select(grp => grp.Count())
-                                 .ToList();
-            var score = sortedGrps.First() - sortedGrps.Last();
-            return score;
+            var pairs = this.ConvertPolymerToPairs();
+            pairs.ForEach(pair =>
+            {
+                var key = this.Keys.First(key => key.Pair == pair);
+                key.InstanceCount += 1;
+            });
+        }
+
+        internal long CalculateScore()
+        {
+            var pairCounts = this.Keys.Select(key => new { Letter = key.Pair[0], InstanceCount = (long)key.InstanceCount });
+            var groupedByletter = pairCounts.GroupBy(counts => counts.Letter);
+            var sumOfLetterGroups = groupedByletter.Select(letterCounts => 
+                                        new { Letter = letterCounts.Key, 
+                                            InstanceCount = (long)letterCounts.Sum(letterCount => letterCount.InstanceCount) + 
+                                                                            (letterCounts.Key == this.LastLetter ? 1 : 0) 
+                                        }).OrderByDescending(letterCount => letterCount.InstanceCount)
+                                          .ToList();
+            var letterCounts = sumOfLetterGroups;
+
+            var mostCommon = letterCounts.First().InstanceCount;
+            var leastCommon = letterCounts.Last().InstanceCount;
+            return mostCommon - leastCommon;
         }
 
         internal void InsertPairsXTimes(int numberOfTimes)
         {
             for (int i = 0; i < numberOfTimes; i++)
             {
-                this.InsertPairsOnce();
+                this.SplitPairs();
             }
         }
 
-        private void InsertPairsOnce()
+        private void SplitPairs()
+        {
+            this.Keys.ForEach(key => key.Split());
+            this.Keys.ForEach(key => key.Combine());
+        }
+
+        private List<string> ConvertPolymerToPairs()
         {
             var lastChar = '\0';
             var pairs = new List<String>();
@@ -45,15 +73,7 @@ namespace Day14Tests
                 }
                 lastChar = chr;
             });
-            var insertedPairs = pairs.Select(pair => this.Insert(pair)).ToList();
-            this.StartingPolymer = String.Join(String.Empty, insertedPairs) + pairs.Last()[1];
-            
-        }
-
-        private string Insert(string pair)
-        {
-            var key = this.Keys.First(first => first.Pair == pair);
-            return $"{pair[0]}{key.Insert}";
+            return pairs;
         }
     }
 }
