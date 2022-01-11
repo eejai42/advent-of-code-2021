@@ -9,7 +9,7 @@ namespace Day2Tests
 {
     public class Tests
     {
-        public DiagnosticReport Report { get; private set; }
+        public DiagnosticReport DiagnosticReport { get; private set; }
 
         [SetUp]
         public void Setup()
@@ -23,14 +23,14 @@ namespace Day2Tests
                                .Split(Environment.NewLine)
                                .Select(reading => new Reading(reading))
                                .ToList();
-            this.Report = new DiagnosticReport(readings);
+            this.DiagnosticReport = new DiagnosticReport(readings);
         }
 
         [Test]
         public void Part1()
         {
-            int gamma = this.Report.CalculateGamma();
-            int epsilon = this.Report.CalculateEpsilon();
+            int gamma = this.DiagnosticReport.CalculateGamma();
+            int epsilon = this.DiagnosticReport.CalculateEpsilon();
             var answer = gamma * epsilon;
             Assert.IsTrue(answer == 4103154);
         }
@@ -38,8 +38,8 @@ namespace Day2Tests
         [Test]
         public void Part2()
         {
-            int o2Rating = this.Report.CalculateOxygenGeneratorRating();
-            int co2Rating = this.Report.CalculateC02ScrubberRating();
+            int o2Rating = this.DiagnosticReport.CalculateOxygenGeneratorRating();
+            int co2Rating = this.DiagnosticReport.CalculateC02ScrubberRating();
             var answer = o2Rating * co2Rating;
             Assert.IsTrue(answer == 4245351);
         }
