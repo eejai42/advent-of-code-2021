@@ -32,7 +32,6 @@ namespace Day11Tests
                 this.cave.Flashes++;
                 this.Energy = 0;
                 this.IncreaseEnergyOfNeighbors();
-                this.cave.SaveCave();
             }
         }
 

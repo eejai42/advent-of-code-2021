@@ -20,5 +20,14 @@ namespace Day11Tests
             var output = cave.ChartPath(100);
              Assert.IsTrue(output == -1);
         }
+
+
+        [Test]
+        public void Part2()
+        {
+            var cave = new Cave(this.Input);
+            var output = cave.ChartPathUntilSynchronized();
+            Assert.IsTrue(output == -1);
+        }
     }
 }

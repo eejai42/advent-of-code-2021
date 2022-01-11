@@ -28,6 +28,18 @@ namespace Day11Tests
             this.Octopuses.ForEach(octopus => octopus.FindNeighbors());
         }
 
+        internal int ChartPathUntilSynchronized()
+        {
+            var step = 0;
+            while (this.Octopuses.Any(octopus => octopus.Energy != 0))
+            {
+                step++;
+                this.Flashes = 0;
+                this.IncrementStep();
+            }
+            return step;
+        }
+
         public int Width { get; }
         public int Height { get; }
         public Octopus[,] Map { get; }
